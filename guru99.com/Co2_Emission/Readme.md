@@ -20,5 +20,6 @@ Day 2.
     Printing the data in required format using formatted string
 
 Day 3.
+
     It's time to visualize the data. Plot the emissions data from a user-selected country. 
     You should use Python plotting library matplotlib for drawing the plots.

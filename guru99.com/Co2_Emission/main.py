@@ -66,25 +66,20 @@ def visualize(country):
 
 
 def run_app():
-    #     year = take_user_input()
-    #     if year is None:
-    #         print("Sorry we don't have data for this year")
-    #         return
-    #     # min_em, max_em = min_max_emission(year)
-    #     everage_em = everage_emission(year)
-    #     minn_country, maxx_country = min_max_emission(year)
-    #     print(
-    #         f"In {year}, countries with minimum and maximum CO2 emission level where\
-    # {[minn_country]} and {[maxx_country]} respectively.\
-    # \nAverage CO2 emission's in {year} were {everage_em}"
-    #     )
+    year = take_user_input()
+    if year is None:
+        print("Sorry we don't have data for this year")
+        return
+    # min_em, max_em = min_max_emission(year)
+    everage_em = everage_emission(year)
+    minn_country, maxx_country = min_max_emission(year)
+    print(
+        f"In {year}, countries with minimum and maximum CO2 emission level where\
+    {[minn_country]} and {[maxx_country]} respectively.\
+    \nAverage CO2 emission's in {year} were {everage_em}"
+    )
     country_to_visualize = input("Select the country to visualize: ").title()
     visualize(country_to_visualize)
 
 
 run_app()
-# plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
-# plt.xlabel("entry a")
-# plt.ylabel("entry b")
-# plt.suptitle("Categorical Plotting")
-# plt.show()

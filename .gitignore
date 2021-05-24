@@ -132,3 +132,7 @@ data_structures/test/
 .vscode/
 .vscode/settings.json
 .vscode/settings.json
+.courses
+guru99.com/Co2_Emission/data/Emissions.csv
+guru99.com/Co2_Emission/min_max.py
+requirements.in
