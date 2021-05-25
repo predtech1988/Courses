@@ -23,3 +23,7 @@ Day 3.
 
     It's time to visualize the data. Plot the emissions data from a user-selected country. 
     You should use Python plotting library matplotlib for drawing the plots.
+
+Day 4.
+
+    It's time to compare data. In today's task, you will plot a comparison graph based on user input.
