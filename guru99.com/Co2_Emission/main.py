@@ -4,9 +4,11 @@ import matplotlib.pyplot as plt
 
 STARTING_YEAR = 1997
 data = {}
-with open("guru99.com\\Co2_Emission\\data\\Emissions_full.csv", "r") as f:
+csv_columns = ""
+with open("guru99.com\\Co2_Emission\\data\\Emissions_full.csv", "r", encoding="UTF-8") as f:
     file = csv.reader(f)
-    next(file)  # Skip 1st line of the table
+    tmp_string = f.readline()[:-1]  # removes \n in 1st line of csv file
+    csv_columns = tmp_string.split(",")
     for row in file:
         data[row[0]] = row[1:]
     print("All data from Emissions.csv has been read into a dictionary.")
@@ -51,7 +53,7 @@ def check_country_name(country):
     if country[0] == " ":
         country = country[1:]
     if not (country in data):
-        print("Wrong country name")
+        print(f"Wrong country name: {country}")
         return "Bad_name"
     return country
 
@@ -98,6 +100,28 @@ def draw_graph(country_1, country_2=None):
         plt.show()
 
 
+def extract_data(countryes, data):
+    strings_list = []
+    for country in countryes:
+        country = check_country_name(country)
+        if country == "Bad_name":
+            continue
+        item = data[country]
+        string = ""
+        string += str(country) + ","
+        for i in range(len(item)):
+            string += str(item[i]) + ","
+            if i == len(item) - 1:
+                string += str(item[i])
+        strings_list.append(string)
+
+    with open("guru99.com\\Co2_Emission\\data\\Emissions_subset.csv", "w", newline="") as f:
+        writer = csv.writer(f, delimiter=",")
+        writer.writerow((csv_columns))
+        for string in strings_list:
+            writer.writerow(string.split(","))
+
+
 def run_app():
     year = take_user_input()
     if year is None:
@@ -108,16 +132,30 @@ def run_app():
     minn_country, maxx_country = min_max_emission(year)
     print(
         f"In {year}, countries with minimum and maximum CO2 emission level where\
-{[minn_country]} and {[maxx_country]} respectively.\
-    \nAverage CO2 emission's in {year} were {everage_em}"
+    {[minn_country]} and {[maxx_country]} respectively.\
+        \nAverage CO2 emission's in {year} were {everage_em}"
     )
+    # Need more input check
     country_to_visualize = input("Select the country to visualize: ").title()
     draw_graph(country_to_visualize)
+    # Checking input and draw 2 graphs
     pair_to_visualize = input("Write two comma-separated countries, to visualize data: ").title().split(",")
-    if len(pair_to_visualize) != 2:
+    if len(pair_to_visualize) == 1 and not (len(pair_to_visualize[0]) == 0):
         draw_graph(pair_to_visualize[0])
-    else:
+    elif len(pair_to_visualize) == 2:
         draw_graph(pair_to_visualize[0], pair_to_visualize[1])
+    else:
+        print("Input is wrong!")
+    # Checking input and extract
+    data_to_extract = (
+        input("Write up to 3 comma-separated countries for which you want to extract data: ").title().split(",")
+    )
+    if len(data_to_extract) == 1 and not (len(data_to_extract[0]) == 0):
+        extract_data(data_to_extract, data)
+    elif len(data_to_extract) == 2 or len(data_to_extract) == 3:
+        extract_data(data_to_extract, data)
+    else:
+        print("Input is wrong!")
 
 
 run_app()

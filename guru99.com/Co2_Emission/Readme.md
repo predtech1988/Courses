@@ -27,3 +27,9 @@ Day 3.
 Day 4.
 
     It's time to compare data. In today's task, you will plot a comparison graph based on user input.
+
+Day 5.
+    
+    You will extract data for up to three user-selected countries and save it to a new file Emissions_subset.csv. 
+    The new file should have the exact same format as the source file, i.e. first line of headers and then up
+    to 3 lines for selected countries. 
